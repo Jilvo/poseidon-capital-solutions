@@ -26,9 +26,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         System.out.println("SecurityConfig.filterChain");
         return http.authorizeHttpRequests(auth -> {
-            auth.requestMatchers("/user/**").hasRole("ADMIN");
-            auth.anyRequest().authenticated();
-            // auth.anyRequest().permitAll();
+//            auth.requestMatchers("/user/**").hasRole("ADMIN");
+//            auth.anyRequest().authenticated();
+              auth.anyRequest().permitAll();
         }).formLogin(Customizer.withDefaults())
                 .logout(logout -> {
                     logout.logoutUrl("/logout");

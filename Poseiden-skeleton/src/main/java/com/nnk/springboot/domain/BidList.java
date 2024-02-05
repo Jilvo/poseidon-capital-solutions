@@ -12,7 +12,6 @@ public class BidList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer BidListId;
     private String account;
     private String type;
     private Double bidQuantity;
@@ -38,11 +37,11 @@ public class BidList {
     public BidList() {
     }
 
-    public BidList(Integer bidListId, String account, String type, Double bidQuantity, Double askQuantity, Double bid,
+    public BidList(Integer id, String account, String type, Double bidQuantity, Double askQuantity, Double bid,
             Double ask, String benchmark, Timestamp bidListDate, String commentary, String security, String status,
             String trader, String book, String creationName, Timestamp creationDate, String revisionName,
             Timestamp revisionDate, String dealName, String dealType, String sourceListId, String side) {
-        this.BidListId = bidListId;
+        this.id = id;
         this.account = account;
         this.type = type;
         this.bidQuantity = bidQuantity;
@@ -68,11 +67,11 @@ public class BidList {
 
     // Getters and Setters
     public Integer getBidListId() {
-        return BidListId;
+        return id;
     }
 
-    public void setBidListId(Integer bidListId) {
-        BidListId = bidListId;
+    public void setBidListId(Integer id) {
+        id = id;
     }
 
     public String getAccount() {

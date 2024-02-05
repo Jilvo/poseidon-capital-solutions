@@ -1,95 +1,103 @@
 create database prod;
 use prod;
-CREATE TABLE Bid (
-    BidListId INT PRIMARY KEY,
-    account VARCHAR(255),
-    type VARCHAR(255),
-    bidQuantity DOUBLE,
-    askQuantity DOUBLE,
-    bid DOUBLE,
-    ask DOUBLE,
-    benchmark VARCHAR(255),
-    bidListDate TIMESTAMP,
-    commentary TEXT,
-    security VARCHAR(255),
-    status VARCHAR(255),
-    trader VARCHAR(255),
-    book VARCHAR(255),
-    creationName VARCHAR(255),
-    creationDate TIMESTAMP,
-    revisionName VARCHAR(255),
-    revisionDate TIMESTAMP,
-    dealName VARCHAR(255),
-    dealType VARCHAR(255),
-    sourceListId VARCHAR(255),
-    side VARCHAR(255)
-);
+CREATE TABLE BidList (
+  id tinyint(4) NOT NULL AUTO_INCREMENT,
+  account VARCHAR(30) NOT NULL,
+  type VARCHAR(30) NOT NULL,
+  bidQuantity DOUBLE,
+  askQuantity DOUBLE,
+  bid DOUBLE ,
+  ask DOUBLE,
+  benchmark VARCHAR(125),
+  bidListDate TIMESTAMP,
+  commentary VARCHAR(125),
+  security VARCHAR(125),
+  status VARCHAR(10),
+  trader VARCHAR(125),
+  book VARCHAR(125),
+  creationName VARCHAR(125),
+  creationDate TIMESTAMP ,
+  revisionName VARCHAR(125),
+  revisionDate TIMESTAMP ,
+  dealName VARCHAR(125),
+  dealType VARCHAR(125),
+  sourceListId VARCHAR(125),
+  side VARCHAR(125),
 
-CREATE TABLE CurvePoint (
-    id INT PRIMARY KEY,
-    curveId INT,
-    asOfDate TIMESTAMP,
-    term DOUBLE,
-    value DOUBLE,
-    creationDate TIMESTAMP
-);
-
-CREATE TABLE Rating (
-    id INT PRIMARY KEY,
-    moodysRating VARCHAR(255),
-    sandPRating VARCHAR(255),
-    fitchRating VARCHAR(255),
-    orderNumber INT
-);
-
-CREATE TABLE Rule (
-    id INT PRIMARY KEY,
-    name VARCHAR(255),
-    description TEXT,
-    json TEXT,
-    template TEXT,
-    sqlStr TEXT,
-    sqlPart TEXT
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE Trade (
-    tradeId INT PRIMARY KEY,
-    account VARCHAR(255),
-    type VARCHAR(255),
-    buyQuantity DOUBLE,
-    sellQuantity DOUBLE,
-    buyPrice DOUBLE,
-    sellPrice DOUBLE,
-    benchmark VARCHAR(255),
-    tradeDate TIMESTAMP,
-    security VARCHAR(255),
-    status VARCHAR(255),
-    trader VARCHAR(255),
-    book VARCHAR(255),
-    creationName VARCHAR(255),
-    creationDate TIMESTAMP,
-    revisionName VARCHAR(255),
-    revisionDate TIMESTAMP,
-    dealName VARCHAR(255),
-    dealType VARCHAR(255),
-    sourceListId VARCHAR(255),
-    side VARCHAR(255)
+  id tinyint(4) NOT NULL AUTO_INCREMENT,
+  account VARCHAR(30) NOT NULL,
+  type VARCHAR(30) NOT NULL,
+  buyQuantity DOUBLE,
+  sellQuantity DOUBLE,
+  buyPrice DOUBLE ,
+  sellPrice DOUBLE,
+  tradeDate TIMESTAMP,
+  security VARCHAR(125),
+  status VARCHAR(10),
+  trader VARCHAR(125),
+  benchmark VARCHAR(125),
+  book VARCHAR(125),
+  creationName VARCHAR(125),
+  creationDate TIMESTAMP ,
+  revisionName VARCHAR(125),
+  revisionDate TIMESTAMP ,
+  dealName VARCHAR(125),
+  dealType VARCHAR(125),
+  sourceListId VARCHAR(125),
+  side VARCHAR(125),
+
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE CurvePoint (
+  id tinyint(4) NOT NULL AUTO_INCREMENT,
+  CurveId tinyint,
+  asOfDate TIMESTAMP,
+  term DOUBLE ,
+  value DOUBLE ,
+  creationDate TIMESTAMP ,
+
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE Rating (
+  id tinyint(4) NOT NULL AUTO_INCREMENT,
+  moodysRating VARCHAR(125),
+  sandPRating VARCHAR(125),
+  fitchRating VARCHAR(125),
+  orderNumber tinyint,
+
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE RuleName (
+  id tinyint(4) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(125),
+  description VARCHAR(125),
+  json VARCHAR(125),
+  template VARCHAR(512),
+  sqlStr VARCHAR(125),
+  sqlPart VARCHAR(125),
+
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE Users (
-    id INT PRIMARY KEY,
-    username VARCHAR(255),
-    password VARCHAR(255),
-    fullname VARCHAR(255),
-    role VARCHAR(255)
+  id tinyint(4) NOT NULL AUTO_INCREMENT,
+  username VARCHAR(125),
+  password VARCHAR(125),
+  fullname VARCHAR(125),
+  role VARCHAR(125),
+
+  PRIMARY KEY (id)
 );
 
--- Insert some sample data
-INSERT INTO Bid VALUES (1, 'account1', 'type1', 100.0, 200.0, 1.0, 2.0, 'benchmark1', NOW(), 'commentary1', 'security1', 'status1', 'trader1', 'book1', 'creationName1', NOW(), 'revisionName1', NOW(), 'dealName1', 'dealType1', 'sourceListId1', 'side1');
-INSERT INTO CurvePoint VALUES (1, 1, NOW(), 1.0, 2.0, NOW());
-INSERT INTO Rating VALUES (1, 'Aaa', 'AAA', 'AAA', 1);
-INSERT INTO Rule VALUES (1, 'rule1', 'description1', '{}', 'template1', 'sqlStr1', 'sqlPart1');
-INSERT INTO Trade VALUES (1, 'account1', 'type1', 100.0, 200.0, 1.0, 2.0, 'benchmark1', NOW(), 'security1', 'status1', 'trader1', 'book1', 'creationName1', NOW(), 'revisionName1', NOW(), 'dealName1', 'dealType1', 'sourceListId1', 'side1');
+insert into Users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ADMIN");
+insert into Users(fullname, username, password, role) values("User", "user", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "USER");
 INSERT INTO Users (id, username, password, fullname, role) VALUES 
 (1, 'john.doe@example.com', '$2a$10$mcPOGPV77LLhooG.2HKSX.7F2.1PjNWdEktSkihIXIaJGS6cYf5Ee', 'John Doe', 'ADMIN'),
 (2, 'jane.doe@example.com', '$2a$10$mcPOGPV77LLhooG.2HKSX.7F2.1PjNWdEktSkihIXIaJGS6cYf5Ee', 'Jane Doe', 'ADMIN'),

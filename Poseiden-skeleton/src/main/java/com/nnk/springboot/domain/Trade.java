@@ -9,11 +9,12 @@ public class Trade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // private Integer id;
-    private Integer tradeId;
+    private Integer id;
     private String account;
     private String type;
     private Double buyQuantity;
     private Double sellQuantity;
+    @Column(name = "buyprice")
     private Double buyPrice;
     private Double sellPrice;
     private String benchmark;
@@ -34,11 +35,11 @@ public class Trade {
     public Trade() {
     }
 
-    public Trade(Integer tradeId, String account, String type, Double buyQuantity, Double sellQuantity, Double buyPrice,
+    public Trade(Integer id, String account, String type, Double buyQuantity, Double sellQuantity, Double buyPrice,
             Double sellPrice, String benchmark, Timestamp tradeDate, String security, String status, String trader,
             String book, String creationName, Timestamp creationDate, String revisionName, Timestamp revisionDate,
             String dealName, String dealType, String sourceListId, String side) {
-        this.tradeId = tradeId;
+        this.id = id;
         this.account = account;
         this.type = type;
         this.buyQuantity = buyQuantity;
@@ -62,12 +63,12 @@ public class Trade {
     }
 
     // Getters and Setters
-    public Integer getTradeId() {
-        return tradeId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setTradeId(Integer tradeId) {
-        this.tradeId = tradeId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getAccount() {
