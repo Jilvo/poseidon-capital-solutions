@@ -1,6 +1,11 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.repositories.RatingRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,10 +20,14 @@ import javax.validation.Valid;
 public class RatingController {
     // TODO: Inject Rating service
 
+    @Autowired
+    private RatingRepository ratingRepository;
+
     @RequestMapping("/rating/list")
-    public String home(Model model)
-    {
+    public String home(Model model, HttpServletRequest request) {
         // TODO: find all Rating, add to model
+        model.addAttribute("bidLists", ratingRepository.findAll());
+        model.addAttribute("httpServletRequest", request);
         return "rating/list";
     }
 
@@ -41,8 +50,9 @@ public class RatingController {
 
     @PostMapping("/rating/update/{id}")
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
-                             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Rating and return Rating list
+            BindingResult result, Model model) {
+        // TODO: check required fields, if valid call service to update Rating and
+        // return Rating list
         return "redirect:/rating/list";
     }
 

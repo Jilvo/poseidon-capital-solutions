@@ -98,9 +98,9 @@ CREATE TABLE Users (
 
 insert into Users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ADMIN");
 insert into Users(fullname, username, password, role) values("User", "user", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "USER");
-INSERT INTO Users (id, username, password, fullname, role) VALUES 
-(1, 'john.doe@example.com', '$2a$10$mcPOGPV77LLhooG.2HKSX.7F2.1PjNWdEktSkihIXIaJGS6cYf5Ee', 'John Doe', 'ADMIN'),
-(2, 'jane.doe@example.com', '$2a$10$mcPOGPV77LLhooG.2HKSX.7F2.1PjNWdEktSkihIXIaJGS6cYf5Ee', 'Jane Doe', 'ADMIN'),
-(3, 'jean.valjean@example.com', '$2a$10$mcPOGPV77LLhooG.2HKSX.7F2.1PjNWdEktSkihIXIaJGS6cYf5Ee', 'Jean Valjean', 'ADMIN'),
-(4, 'peter.parker@example.com', '$2a$10$mcPOGPV77LLhooG.2HKSX.7F2.1PjNWdEktSkihIXIaJGS6cYf5Ee', 'Peter Parker', 'ADMIN'),
-(5, 'gwen.stacy@example.com', 'password5', 'Gwen Stacy', 'USER');
+INSERT INTO Users (username, password, fullname, role) VALUES 
+('john.doe@example.com', '$2a$10$mcPOGPV77LLhooG.2HKSX.7F2.1PjNWdEktSkihIXIaJGS6cYf5Ee', 'John Doe', 'ADMIN'),
+('jane.doe@example.com', '$2a$10$mcPOGPV77LLhooG.2HKSX.7F2.1PjNWdEktSkihIXIaJGS6cYf5Ee', 'Jane Doe', 'ADMIN'),
+('jean.valjean@example.com', '$2a$10$mcPOGPV77LLhooG.2HKSX.7F2.1PjNWdEktSkihIXIaJGS6cYf5Ee', 'Jean Valjean', 'ADMIN'),
+('peter.parker@example.com', '$2a$10$mcPOGPV77LLhooG.2HKSX.7F2.1PjNWdEktSkihIXIaJGS6cYf5Ee', 'Peter Parker', 'ADMIN'),
+('gwen.stacy@example.com', 'password5', 'Gwen Stacy', 'USER');

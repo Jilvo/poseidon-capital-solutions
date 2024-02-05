@@ -12,6 +12,7 @@ public class Trade {
     private Integer id;
     private String account;
     private String type;
+    @Column(name = "buyquantity")
     private Double buyQuantity;
     private Double sellQuantity;
     @Column(name = "buyprice")

@@ -4,6 +4,8 @@ import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.repositories.TradeRepository;
 import com.nnk.springboot.services.TradeService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +26,9 @@ public class TradeController {
     private TradeService tradeService;
 
     @RequestMapping("/trade/list")
-    public String home(Model model) {
+    public String home(Model model, HttpServletRequest request) {
         model.addAttribute("trades", tradeRepository.findAll());
+        model.addAttribute("httpServletRequest", request);
         System.out.println(tradeRepository.findAll());
         return "trade/list";
     }

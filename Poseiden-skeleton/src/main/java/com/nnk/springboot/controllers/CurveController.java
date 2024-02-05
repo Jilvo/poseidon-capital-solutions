@@ -1,6 +1,11 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.repositories.CurvePointRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,11 +19,14 @@ import javax.validation.Valid;
 @Controller
 public class CurveController {
     // TODO: Inject Curve Point service
+    @Autowired
+    private CurvePointRepository curvePointRepository;
 
     @RequestMapping("/curvePoint/list")
-    public String home(Model model)
-    {
+    public String home(Model model, HttpServletRequest request) {
         // TODO: find all Curve Point, add to model
+        model.addAttribute("curvePoints", curvePointRepository.findAll());
+        model.addAttribute("httpServletRequest", request);
         return "curvePoint/list";
     }
 
@@ -41,8 +49,9 @@ public class CurveController {
 
     @PostMapping("/curvePoint/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
-                             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Curve and return Curve list
+            BindingResult result, Model model) {
+        // TODO: check required fields, if valid call service to update Curve and return
+        // Curve list
         return "redirect:/curvePoint/list";
     }
 
