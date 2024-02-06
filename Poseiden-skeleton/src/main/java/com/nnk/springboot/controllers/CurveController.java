@@ -44,8 +44,8 @@ public class CurveController {
                 return "curvePoint/add";
             }
             curvePointRepository.save(curvePoint);
-            model.addAttribute("trades", curvePointRepository.findAll());
-            return "redirect:/trade/list";
+            model.addAttribute("curvePoint", curvePointRepository.findAll());
+            return "redirect:/curvePoint/list";
         }
         return "curvePoint/add";
     }
@@ -54,7 +54,7 @@ public class CurveController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get CurvePoint by Id and to model then show to the form
         CurvePoint curvePoint = curvePointRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid trade Id:" + id));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid curvePoint Id:" + id));
         model.addAttribute("curvePoint", curvePoint);
         return "curvePoint/update";
     }

@@ -43,7 +43,7 @@ public class BidListController {
                 return "bidList/add";
             }
             bidListRepository.save(bid);
-            model.addAttribute("bids", bidListRepository.findAll());
+            model.addAttribute("bidLists", bidListRepository.findAll());
             return "redirect:/bidList/list";
         }
         return "bidList/add";
@@ -63,10 +63,10 @@ public class BidListController {
             BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Bid and return
         if (result.hasErrors()) {
-            return "trade/update";
+            return "bidList/update";
         }
         bidListRepository.save(bidList);
-        model.addAttribute("bidList", bidListRepository.findAll());
+        model.addAttribute("bidLists", bidListRepository.findAll());
         return "redirect:/bidList/list";
     }
 
@@ -76,7 +76,7 @@ public class BidListController {
         BidList bid = bidListRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid bid Id:" + id));
         bidListRepository.deleteById(id);
-        model.addAttribute("bidList", bidListRepository.findAll());
+        model.addAttribute("bidLists", bidListRepository.findAll());
         return "redirect:/bidList/list";
     }
 }
