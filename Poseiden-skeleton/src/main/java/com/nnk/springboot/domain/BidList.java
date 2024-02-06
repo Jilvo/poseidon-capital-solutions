@@ -66,11 +66,11 @@ public class BidList {
     }
 
     // Getters and Setters
-    public Integer getBidListId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setBidListId(Integer id) {
+    public void setId(Integer id) {
         id = id;
     }
 

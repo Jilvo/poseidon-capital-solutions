@@ -25,7 +25,7 @@ public class RuleNameController {
     @RequestMapping("/ruleName/list")
     public String home(Model model, HttpServletRequest request) {
         // TODO: find all RuleName, add to model
-        model.addAttribute("bidLists", ruleNameRepository.findAll());
+        model.addAttribute("ruleNames", ruleNameRepository.findAll());
         model.addAttribute("httpServletRequest", request);
         return "ruleName/list";
     }
@@ -38,12 +38,24 @@ public class RuleNameController {
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return RuleName list
+        if (!result.hasErrors()) {
+            if (ruleName.getId() != null && ruleNameRepository.existsById(ruleName.getId())) {
+                model.addAttribute("error", "ruleName with id " + ruleName.getId() + " already exists");
+                return "ruleName/add";
+            }
+            ruleNameRepository.save(ruleName);
+            model.addAttribute("ruleNames", ruleNameRepository.findAll());
+            return "redirect:/ruleName/list";
+        }
         return "ruleName/add";
     }
 
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get RuleName by Id and to model then show to the form
+        RuleName ruleName = ruleNameRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid trade Id:" + id));
+        model.addAttribute("ruleName", ruleName);
         return "ruleName/update";
     }
 
@@ -52,12 +64,21 @@ public class RuleNameController {
             BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update RuleName and
         // return RuleName list
+        if (result.hasErrors()) {
+            return "trade/update";
+        }
+        ruleNameRepository.save(ruleName);
+        model.addAttribute("ruleNames", ruleNameRepository.findAll());
         return "redirect:/ruleName/list";
     }
 
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
         // TODO: Find RuleName by Id and delete the RuleName, return to Rule list
+        RuleName ruleName = ruleNameRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid trade Id:" + id));
+        ruleNameRepository.deleteById(id);
+        model.addAttribute("trades", ruleNameRepository.findAll());
         return "redirect:/ruleName/list";
     }
 }

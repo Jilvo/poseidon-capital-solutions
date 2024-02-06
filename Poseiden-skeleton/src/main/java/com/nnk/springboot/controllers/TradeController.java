@@ -29,7 +29,6 @@ public class TradeController {
     public String home(Model model, HttpServletRequest request) {
         model.addAttribute("trades", tradeRepository.findAll());
         model.addAttribute("httpServletRequest", request);
-        System.out.println(tradeRepository.findAll());
         return "trade/list";
     }
 
