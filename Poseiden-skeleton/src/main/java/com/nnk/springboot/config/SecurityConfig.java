@@ -11,17 +11,32 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Configuration class for Spring Security.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     private CustomUserDetailService customUserDetailService = null;
 
+    /**
+     * Sets the CustomUserDetailService.
+     *
+     * @param customUserDetailService the CustomUserDetailService
+     */
     @Autowired
     public void SecurityConfiguration(CustomUserDetailService customUserDetailService) {
         this.customUserDetailService = customUserDetailService;
     }
 
+    /**
+     * Configures the security filter chain.
+     *
+     * @param http the HttpSecurity
+     * @return the SecurityFilterChain
+     * @throws Exception if an error occurs
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         System.out.println("SecurityConfig.filterChain");
@@ -37,6 +52,14 @@ public class SecurityConfig {
                 .build();
     }
 
+    /**
+     * Configures the AuthenticationManager.
+     *
+     * @param http                  the HttpSecurity
+     * @param bCryptPasswordEncoder the BCryptPasswordEncoder
+     * @return the AuthenticationManager
+     * @throws Exception if an error occurs
+     */
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder)
             throws Exception {
@@ -46,6 +69,11 @@ public class SecurityConfig {
         return authenticationManagerBuilder.build();
     }
 
+    /**
+     * Creates a BCryptPasswordEncoder bean.
+     *
+     * @return the BCryptPasswordEncoder
+     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
