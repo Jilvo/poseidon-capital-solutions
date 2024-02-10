@@ -2,6 +2,7 @@ package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
@@ -11,9 +12,13 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotEmpty(message = "MoodysRating is required")
     private String moodysRating;
+    @NotEmpty(message = "SandPRating is required")
     private String sandPRating;
+    @NotEmpty(message = "FitchRating is required")
     private String fitchRating;
+    @NotEmpty(message = "OrderNumber is required")
     private Integer orderNumber;
 
     public Rating() {

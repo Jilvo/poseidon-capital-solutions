@@ -3,6 +3,8 @@ package com.nnk.springboot.domain;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 
+import javax.validation.constraints.NotEmpty;
+
 @Entity
 @Table(name = "trade")
 public class Trade {
@@ -10,9 +12,12 @@ public class Trade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // private Integer id;
     private Integer id;
+    @NotEmpty(message = "Account is required")
     private String account;
+    @NotEmpty(message = "Type is required")
     private String type;
     @Column(name = "buyquantity")
+    @NotEmpty(message = "BuyQuantity is required")
     private Double buyQuantity;
     private Double sellQuantity;
     @Column(name = "buyprice")

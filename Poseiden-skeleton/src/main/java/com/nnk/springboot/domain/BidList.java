@@ -3,6 +3,8 @@ package com.nnk.springboot.domain;
 import jakarta.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -12,8 +14,12 @@ public class BidList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotEmpty(message = "Account is required")
     private String account;
+    @NotEmpty(message = "Type is required")
     private String type;
+    @NotEmpty(message = "BigQuantity is required")
     private Double bidQuantity;
     private Double askQuantity;
     private Double bid;

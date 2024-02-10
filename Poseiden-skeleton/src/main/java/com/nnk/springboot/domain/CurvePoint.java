@@ -2,6 +2,7 @@ package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
@@ -13,7 +14,9 @@ public class CurvePoint {
     private Integer id;
     private Integer curveId;
     private Timestamp asOfDate;
+    @NotEmpty(message = "Term is required")
     private Double term;
+    @NotEmpty(message = "Value is required")
     private Double value;
     private Timestamp creationDate;
 

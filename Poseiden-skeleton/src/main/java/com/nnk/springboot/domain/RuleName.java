@@ -1,5 +1,7 @@
 package com.nnk.springboot.domain;
 
+import javax.validation.constraints.NotEmpty;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -8,11 +10,17 @@ public class RuleName {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotEmpty(message = "Name is required")
     private String name;
+    @NotEmpty(message = "Description is required")
     private String description;
+    @NotEmpty(message = "Json is required")
     private String json;
+    @NotEmpty(message = "Template is required")
     private String template;
+    @NotEmpty(message = "SqlStr is required")
     private String sqlStr;
+    @NotEmpty(message = "SqlPart is required")
     private String sqlPart;
 
     public RuleName() {
