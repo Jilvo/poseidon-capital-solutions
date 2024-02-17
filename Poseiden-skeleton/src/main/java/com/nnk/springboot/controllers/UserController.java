@@ -4,6 +4,8 @@ import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.services.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -25,14 +28,21 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/user/list")
-    public String home(Model model) {
+    public String home(Model model, HttpServletRequest request) {
         model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("httpServletRequest", request);
         return "user/list";
     }
 
     @GetMapping("/user/add")
     public String addUserForm(User bid) {
         return "user/add";
+    }
+
+    @GetMapping("/403")
+    public String getUserForbidden(Model model, HttpServletRequest request) {
+        model.addAttribute("httpServletRequest", request);
+        return "403";
     }
 
     @SuppressWarnings("null")

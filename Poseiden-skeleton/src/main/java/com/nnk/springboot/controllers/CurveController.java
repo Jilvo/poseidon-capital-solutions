@@ -24,7 +24,6 @@ public class CurveController {
 
     @RequestMapping("/curvePoint/list")
     public String home(Model model, HttpServletRequest request) {
-        // TODO: find all Curve Point, add to model
         model.addAttribute("curvePoints", curvePointRepository.findAll());
         model.addAttribute("httpServletRequest", request);
         return "curvePoint/list";
@@ -37,7 +36,6 @@ public class CurveController {
 
     @PostMapping("/curvePoint/validate")
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Curve list
         if (!result.hasErrors()) {
             if (curvePoint.getId() != null && curvePointRepository.existsById(curvePoint.getId())) {
                 model.addAttribute("error", "curvePoint with id " + curvePoint.getId() + " already exists");
@@ -52,7 +50,6 @@ public class CurveController {
 
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get CurvePoint by Id and to model then show to the form
         CurvePoint curvePoint = curvePointRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid curvePoint Id:" + id));
         model.addAttribute("curvePoint", curvePoint);
@@ -62,12 +59,11 @@ public class CurveController {
     @PostMapping("/curvePoint/update/{id}")
     public String updateCurve(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Curve and return
         if (result.hasErrors()) {
             return "curvePoint/update";
         }
         curvePointRepository.save(curvePoint);
-        model.addAttribute("curvePoint", curvePointRepository.findAll());
+        model.addAttribute("curvePoints", curvePointRepository.findAll());
         return "redirect:/curvePoint/list";
     }
 
@@ -77,7 +73,7 @@ public class CurveController {
         CurvePoint curvePoint = curvePointRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid curvePoint Id:" + id));
         curvePointRepository.deleteById(id);
-        model.addAttribute("curvePoint", curvePointRepository.findAll());
+        model.addAttribute("curvePoints", curvePointRepository.findAll());
         return "redirect:/curvePoint/list";
     }
 }
